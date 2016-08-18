@@ -12,6 +12,7 @@ Element to consume the Ordercloud invitations API
 <dom-module id="oc-invitations-api">
   <template>
     <iron-ajax id="getInvitations"></iron-ajax>
+    <iron-ajax id="createInvitation"></iron-ajax>
   </template>
 
   <script>
@@ -30,6 +31,20 @@ Element to consume the Ordercloud invitations API
         return this._generateRequest(this.$.getInvitations);
       },
 
+      /**
+       * Create a new invitation
+       *
+       * @param {emailAddress: String, staffType: Number} params
+       * @return {Promise}
+       */
+      createInvitation: function(orgId, params) {
+        this.$.createInvitation.url = this._url('/organisations/'+orgId+'/staff/invite');
+        this.$.createInvitation.method = "POST";
+        this.$.createInvitation.contentType = "application/json";
+        this.$.createInvitation.body = params;
+        return this._generateRequest(this.$.createInvitation);
+      },
+
 //      /**
 //       * Retrieve organisations where the user has the given permission.
 //       *
@@ -41,18 +56,6 @@ Element to consume the Ordercloud invitations API
 //        return this._generateRequest(this.$.getOrganisations);
 //      },
 //
-//      /**
-//       * Create a new organisation
-//       *
-//       * @return {Promise}
-//       */
-//      createOrganisation: function(newOrganisation) {
-//        this.$.createOrganisation.url = this._url('organisations');
-//        this.$.createOrganisation.method = "POST";
-//        this.$.createOrganisation.contentType = "application/json";
-//        this.$.createOrganisation.body = newOrganisation;
-//        return this._generateRequest(this.$.createOrganisation);
-//      },
 //
 //      /**
 //       * Update an organisation's details
