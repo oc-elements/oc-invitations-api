@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../oc-core-utils/oc-api-provider-behaviour.html">
 
 <!--
 `oc-invitations-api`
@@ -9,25 +11,61 @@ Element to consume the Ordercloud invitations API
 
 <dom-module id="oc-invitations-api">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]</h2>
+    <iron-ajax id="getInvitations"></iron-ajax>
   </template>
 
   <script>
     Polymer({
 
       is: 'oc-invitations-api',
+      behaviors: [OC.Behaviours.ApiProvider],
 
-      properties: {
-        prop1: {
-          type: String,
-          value: 'oc-invitations-api',
-        },
+      /**
+       * Retrieve invites from a organisation.
+       *
+       * @return {Promise}
+       */
+      getInvitations: function(permission) {
+        this.$.getInvitations.url = this._url('/invitations');
+        return this._generateRequest(this.$.getInvitations);
       },
+
+//      /**
+//       * Retrieve organisations where the user has the given permission.
+//       *
+//       * @param {String} permission
+//       * @return {Promise}
+//       */
+//      getOrganisations: function(permission) {
+//        this.$.getOrganisations.url = this._url('authorization/user/permission/' + permission + '/organisations');
+//        return this._generateRequest(this.$.getOrganisations);
+//      },
+//
+//      /**
+//       * Create a new organisation
+//       *
+//       * @return {Promise}
+//       */
+//      createOrganisation: function(newOrganisation) {
+//        this.$.createOrganisation.url = this._url('organisations');
+//        this.$.createOrganisation.method = "POST";
+//        this.$.createOrganisation.contentType = "application/json";
+//        this.$.createOrganisation.body = newOrganisation;
+//        return this._generateRequest(this.$.createOrganisation);
+//      },
+//
+//      /**
+//       * Update an organisation's details
+//       *
+//       * @return {Promise}
+//       */
+//      updateOrganisationDetails: function(organisationId, organisationDetails) {
+//        this.$.updateOrganisationDetails.url = this._url('organisations/' + organisationId + '/detail');
+//        this.$.updateOrganisationDetails.method = "PUT";
+//        this.$.updateOrganisationDetails.contentType = "application/json";
+//        this.$.updateOrganisationDetails.body = organisationDetails;
+//        return this._generateRequest(this.$.updateOrganisationDetails);
+//      },
 
     });
   </script>
