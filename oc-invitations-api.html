@@ -34,14 +34,18 @@ Element to consume the Ordercloud invitations API
       /**
        * Create a new invitation
        *
-       * @param {emailAddress: String, staffType: Number} params
+       * @param {Object[]} paramsArr - array of objects containing invitation details
+       * @param {Object[]} paramsArr[].contacts[] - Contact details e.g. ["test@example.com", "+271231231234"]
+       * @param {Number} paramsArr[].organisationId - Organisation ID
+       * @param {Object[]} paramsArr[].groups[] - Array Org groups ID's invitee belongs to e.g [1,2,3]
+       *
        * @return {Promise}
        */
-      createInvitation: function(orgId, params) {
-        this.$.createInvitation.url = this._url('/organisations/'+orgId+'/staff/invite');
+      createInvitation: function(paramsArr) {
+        this.$.createInvitation.url = this._url('invitations');
         this.$.createInvitation.method = "POST";
         this.$.createInvitation.contentType = "application/json";
-        this.$.createInvitation.body = params;
+        this.$.createInvitation.body = paramsArr;
         return this._generateRequest(this.$.createInvitation);
       },
 
