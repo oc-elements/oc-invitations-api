@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`oc-invitations-api`
+Element to consume the Ordercloud invitations API
+
+@demo demo/index.html 
+-->
+
+<dom-module id="oc-invitations-api">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'oc-invitations-api',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'oc-invitations-api',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
