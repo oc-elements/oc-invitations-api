@@ -13,6 +13,7 @@ Element to consume the Ordercloud invitations API
   <template>
     <iron-ajax id="getInvitations"></iron-ajax>
     <iron-ajax id="createInvitation"></iron-ajax>
+    <iron-ajax id="resendInvite"></iron-ajax>
   </template>
 
   <script>
@@ -26,8 +27,8 @@ Element to consume the Ordercloud invitations API
        *
        * @return {Promise}
        */
-      getInvitations: function(permission) {
-        this.$.getInvitations.url = this._url('/invitations');
+      getInvitations: function(orgId) {
+        this.$.getInvitations.url = this._url('invitations?organisationId='+orgId);
         return this._generateRequest(this.$.getInvitations);
       },
 
@@ -49,30 +50,19 @@ Element to consume the Ordercloud invitations API
         return this._generateRequest(this.$.createInvitation);
       },
 
-//      /**
-//       * Retrieve organisations where the user has the given permission.
-//       *
-//       * @param {String} permission
-//       * @return {Promise}
-//       */
-//      getOrganisations: function(permission) {
-//        this.$.getOrganisations.url = this._url('authorization/user/permission/' + permission + '/organisations');
-//        return this._generateRequest(this.$.getOrganisations);
-//      },
-//
-//
-//      /**
-//       * Update an organisation's details
-//       *
-//       * @return {Promise}
-//       */
-//      updateOrganisationDetails: function(organisationId, organisationDetails) {
-//        this.$.updateOrganisationDetails.url = this._url('organisations/' + organisationId + '/detail');
-//        this.$.updateOrganisationDetails.method = "PUT";
-//        this.$.updateOrganisationDetails.contentType = "application/json";
-//        this.$.updateOrganisationDetails.body = organisationDetails;
-//        return this._generateRequest(this.$.updateOrganisationDetails);
-//      },
+      /**
+       * Resend a email
+       *
+       * @param {String} inviteId
+       * @return {Promise}
+       */
+      resendInvite: function(inviteId) {
+        this.$.resendInvite.url = this._url('invitations/'+inviteId+'/resend');
+        this.$.resendInvite.method = "PUT";
+        this.$.resendInvite.contentType = "application/json";
+        return this._generateRequest(this.$.resendInvite);
+      },
+
 
     });
   </script>
