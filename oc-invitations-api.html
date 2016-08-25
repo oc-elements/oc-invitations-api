@@ -71,10 +71,10 @@ Element to consume the Ordercloud invitations API
        * @return {Promise}
        */
       rejectInvite: function(inviteHash) {
-        this.$.resendInvite.url = this._url('invitations/'+inviteHash+'/decline');
-        this.$.resendInvite.method = "PUT";
-        this.$.resendInvite.contentType = "application/json";
-        return this._generateRequest(this.$.resendInvite);
+        this.$.rejectInvite.url = this._url('invitations/'+inviteHash+'/decline');
+        this.$.rejectInvite.method = "PUT";
+        this.$.rejectInvite.contentType = "application/json";
+        return this._generateRequest(this.$.rejectInvite);
       },
 
 
