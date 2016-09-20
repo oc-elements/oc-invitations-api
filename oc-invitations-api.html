@@ -33,6 +33,17 @@ Element to consume the Ordercloud invitations API
         return this._generateRequest(this.$.getInvitations);
       },
 
+
+      /**
+       * Retrieve  a single invite
+       *
+       * @return {Promise}
+       */
+      getInvitation: function(inviteHash) {
+        this.$.getInvitation.url = this._url('invitations/'+inviteHash);
+        return this._generateRequest(this.$.getInvitation);
+      },
+
       /**
        * Create a new invitation
        *
@@ -65,7 +76,7 @@ Element to consume the Ordercloud invitations API
       },
 
       /**
-       * Resend a email
+       * Reject a email
        *
        * @param {String} inviteId
        * @return {Promise}
