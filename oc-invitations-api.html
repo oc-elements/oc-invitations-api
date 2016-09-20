@@ -12,6 +12,7 @@ Element to consume the Ordercloud invitations API
 <dom-module id="oc-invitations-api">
   <template>
     <iron-ajax id="getInvitations"></iron-ajax>
+    <iron-ajax id="getInvitation"></iron-ajax>
     <iron-ajax id="createInvitation"></iron-ajax>
     <iron-ajax id="resendInvite"></iron-ajax>
     <iron-ajax id="rejectInvite"></iron-ajax>
@@ -37,6 +38,7 @@ Element to consume the Ordercloud invitations API
       /**
        * Retrieve  a single invite
        *
+       ** @param {String} inviteHash
        * @return {Promise}
        */
       getInvitation: function(inviteHash) {
@@ -78,7 +80,7 @@ Element to consume the Ordercloud invitations API
       /**
        * Reject a email
        *
-       * @param {String} inviteId
+       * @param {String} inviteHash
        * @return {Promise}
        */
       rejectInvite: function(inviteHash) {
